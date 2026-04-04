@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import { AvailableUserRoles, AvailableUserStatus, UserRoles, UserStatus } from "../utils/constants";
+import { AvailableUserRoles, AvailableUserStatus, UserRoles, UserStatus } from "../utils/constants.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 

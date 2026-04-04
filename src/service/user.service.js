@@ -1,5 +1,5 @@
 import User from "../model/user.model.js";
-import ApiError from "../utils/ApiError.js";
+import {ApiError} from "../utils/ApiError.js";
 import { UserRoles } from "../utils/constants.js";
 
 
