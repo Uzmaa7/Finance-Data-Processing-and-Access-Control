@@ -1,7 +1,7 @@
 import {body} from "express-validator";
 import { AvailableUserRoles } from "../utils/constants.js";
 
-const registerUserValidator = () => {
+const registerUserValidation = () => {
     return [
         body("email")
             .trim()
@@ -27,4 +27,18 @@ const registerUserValidator = () => {
     ]
 }
 
-export {registerUserValidator};
+const loginValidation = () => {
+    return [
+        body("email")
+        .trim()
+        .notEmpty().withMessage("email is required")
+        .bail()
+        .isEmail().withMessage("Invalid email"),
+
+        body("password")
+        .trim()
+        .notEmpty().withMessage("password is required")
+    ]
+}
+
+export {registerUserValidation, loginValidation};
