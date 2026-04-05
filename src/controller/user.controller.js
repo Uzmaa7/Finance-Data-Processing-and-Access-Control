@@ -35,7 +35,7 @@ const getUsers = asyncHandler(async(req, res) => {
 const updateUser = asyncHandler(async(req, res) => {
 
     const {id} = req.params;
-    const data = req.body();
+    const data = req.body;
 
     const user = await updateUserService(id, data);
 
