@@ -5,8 +5,11 @@ import { AvailableAmount } from "../utils/constants.js";
 const createRecordValidator = () => {
     return[
         body("amount")
-            .isNumeric().withMessage("Amount must be a number").custom(val => val > 0)
-            .bail(),
+            .notEmpty().withMessage("Amount is required")
+            .bail()
+            .isNumeric().withMessage("Amount must be a number").custom(val => val > 0),
+            
+            
         body("type")
             .isIn(AvailableAmount).withMessage("Invalid record type")
             .bail(),
@@ -42,6 +45,7 @@ const updateRecordValidator = () => {
             .optional()
             .isString()
             .trim()
+            .isLength({ max: 200 }).withMessage("description can not excedd the length of 200 characters"),  
 ]};
 
 export {createRecordValidator, updateRecordValidator};

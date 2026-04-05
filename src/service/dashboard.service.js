@@ -6,7 +6,7 @@ const getDashboardSummaryService = async (userId) => {
         // Step 1: Filter active records for this user
         { 
             $match: { 
-                userId: new mongoose.Types.ObjectId(userId), 
+                // userId: new mongoose.Types.ObjectId(userId), 
                 isDeleted: false 
             } 
         },

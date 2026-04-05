@@ -7,7 +7,7 @@ const updateUserValidator = () => {
             .isMongoId().withMessage("Invalid User ID"),
         body("role")
             .optional()
-            .isIn(AvailableUserRoles).withMessage("Invalid role assigned"),,
+            .isIn(AvailableUserRoles).withMessage("Invalid role assigned"),
         body("status")
             .optional()
             .isIn(AvailableUserStatus).withMessage("Invalid status assigned"),

@@ -1,4 +1,5 @@
 import User from "../model/user.model.js";
+import { ApiError } from "../utils/ApiError.js";
 
 const getUsersService = async (query) => {
 
@@ -50,10 +51,16 @@ const updateUserService = async(userId, updateData) => {
 const deleteUserService = async (userId) => {
     const user = await User.findByIdAndUpdate(
         userId,
-        { isDeleted: true, status: 'INACTIVE' },
+        { 
+            $set: { 
+                isDeleted: true, 
+                status: 'INACTIVE',
+                refreshToken: undefined
+            }   
+        },
         { new: true }
     );
-    if (!user) throw new ApiError(404, "User not found");
+    if (!user) throw new ApiError(404, "User not found or already deactivated");
     return true;
 }
 
