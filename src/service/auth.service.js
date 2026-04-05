@@ -23,9 +23,9 @@ const generateAccessAndRefreshToken = async (userId) => {
 } 
 
 
-const registerUserService = async (data) => {
+const baseUserCreationService = async (data) => {
 
-    const {username, fullname, email, password, role} = data;
+    const {username, fullname, email, password, role, status} = data;
 
     if([username, fullname, email, password].some((field) => field?.trim() === "")){
         throw new ApiError(400, "All fields are required")
@@ -44,7 +44,8 @@ const registerUserService = async (data) => {
         fullname: fullname.toLowerCase(),
         email,
         password,
-        role : role || UserRoles.VIEWER
+        role : role || UserRoles.VIEWER,
+        status: status || UserStatus.ACTIVE,
     })
 
     const createdUser = await User.findById(user._id).select("-password -refreshToken")
@@ -53,6 +54,19 @@ const registerUserService = async (data) => {
     }
 
     return createdUser;
+}
+
+// Public Registration
+const registerUserService = async (data) => {
+    //force role to viewer
+    data.role = UserRoles.VIEWER;
+    return await baseUserCreationService(data);
+}
+
+// Admin User Creation
+const createUserService = async (data) => {
+    //ADMIN  can pass any role or status
+    return await baseUserCreationService(data);
 }
 
 const loginUserService = async(data) => {
@@ -86,4 +100,4 @@ const loginUserService = async(data) => {
     
 }
 
-export {registerUserService, loginUserService};
+export {registerUserService, createUserService, loginUserService};

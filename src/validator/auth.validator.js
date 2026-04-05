@@ -1,5 +1,5 @@
 import {body} from "express-validator";
-import { AvailableUserRoles } from "../utils/constants.js";
+import { AvailableUserRoles, AvailableUserStatus } from "../utils/constants.js";
 
 const registerUserValidation = () => {
     return [
@@ -23,7 +23,9 @@ const registerUserValidation = () => {
             .bail()
             .isLength({ min: 6 }).withMessage("Password must be at least 6 characters"),
         body("role")
-            .optional().isIn(AvailableUserRoles).withMessage("Invalid role assigned")
+            .optional().isIn(AvailableUserRoles).withMessage("Invalid role assigned"),
+        body("status")
+            .optional().isIn(AvailableUserStatus).withMessage("Invalid status assigned"),
     ]
 }
 
