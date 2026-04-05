@@ -34,4 +34,16 @@ const getUsersService = async (query) => {
     }
 }
 
-export {getUsersService};
+//Update User (Role/Status/Details)
+const updateUserService = async(userId, updateData) => {
+    const user = await User.findByIdAndUpdate(
+        userId,
+        { $set: updateData },
+        { new: true, runValidators: true }
+    ).select("-password -refreshToken");
+
+    if (!user) throw new ApiError(404, "User not found");
+    return user;
+}
+
+export {getUsersService, updateUserService};

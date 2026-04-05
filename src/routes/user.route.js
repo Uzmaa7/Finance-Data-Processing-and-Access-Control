@@ -4,7 +4,9 @@ import {UserRoles} from "../utils/constants.js"
 import {verifyJWT} from "../middleware/auth.middleware.js"
 import { validate } from "../middleware/validator.middleware.js";
 import { registerUserValidation } from "../validator/auth.validator.js";
-import { createUser, getUsers } from "../controller/user.controller.js";
+import { createUser, getUsers, updateUser, deleteUser } from "../controller/user.controller.js";
+import { updateUserService } from "../service/user.service.js";
+import { updateUserValidator } from "../validator/user.validator.js";
 
 const userRouter = express.Router();
 
@@ -20,7 +22,7 @@ userRouter.post("/", registerUserValidation(), validate, createUser);
 
 userRouter.get("/", getUsers);
 
-userRouter.patch("/:id", updateUser);
+userRouter.patch("/:id", updateUserValidator(), validate, updateUser);
 
 userRouter.delete("/:id", deleteUser);
 
