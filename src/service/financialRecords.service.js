@@ -54,11 +54,30 @@ const updateRecordService = async (recordId, updateData) => {
     return updatedRecord;
 };
 
+const deleteRecordService = async (recordId) => {
+
+    const record = await FinancialRecords.findOneAndUpdate(
+        { 
+            _id: recordId, 
+            isDeleted: false // Security/Logic: Only delete if currently active
+        },
+        { 
+            $set: { isDeleted: true } 
+        },
+        { 
+            new: true // Return the updated document
+        }
+    );
+
+    // 2. If no record was found (either wrong ID or already deleted)
+    if (!record) {
+        throw new ApiError(404, "Record not found or has already been deleted");
+    }
+
+    return record;
+}
 // const createRecordService = async (userId, data) => {
 
 // }
-// const createRecordService = async (userId, data) => {
 
-// }
-
-export {createRecordService, updateRecordService}
+export {createRecordService, updateRecordService, deleteRecordService}

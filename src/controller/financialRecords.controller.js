@@ -1,5 +1,5 @@
 import {ApiResponse} from "../utils/ApiResponse.js";
-import { createRecordService, updateRecordService } from "../service/financialRecords.service.js";
+import { createRecordService, updateRecordService, deleteRecordService } from "../service/financialRecords.service.js";
 
 const createRecord = asyncHandler(async (req, res) => {
 
@@ -19,4 +19,10 @@ const updateRecord = asyncHandler(async (req, res) => {
     res.status(200).json(new ApiResponse(200, record, "Record updated successfully"));
 });
 
-export {createRecord, updateRecord};
+const deleteRecord = asyncHandler(async (req, res) => {
+    const {id} = req.params;
+    await deleteRecordService(id);
+    res.status(200).json(new ApiResponse(200, {}, "Record deleted successfully"));
+});
+
+export {createRecord, updateRecord, deleteRecord};

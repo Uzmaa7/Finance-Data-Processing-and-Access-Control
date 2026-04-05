@@ -17,11 +17,11 @@ const updateUserValidator = () => {
     ];
 };
 
-const userIdValidator = () => {
+const IdValidator = () => {
     return [
         param("id")
-            .isMongoId().withMessage("Invalid User ID format. Please provide a valid MongoDB ID.")
+            .isMongoId().withMessage("Invalid  ID format. Please provide a valid MongoDB ID.")
     ];
 };
 
-export {updateUserValidator, userIdValidator};
+export {updateUserValidator, IdValidator};
