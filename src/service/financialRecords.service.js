@@ -76,8 +76,52 @@ const deleteRecordService = async (recordId) => {
 
     return record;
 }
-// const createRecordService = async (userId, data) => {
 
-// }
+const getRecordsService = async (filters) => {
+    let { page = 1, limit = 10, type, category, search, startDate, endDate } = filters;
+    //  Build the Query Object
+    const query = { isDeleted: false };
 
-export {createRecordService, updateRecordService, deleteRecordService}
+    page = Math.max(1, parseInt(page));
+
+    limit = Math.min(10 , Math.max(1, parseInt(limit)));
+
+    const skip = ( page - 1 ) * limit;
+
+    if (type) query.type = type;
+    if (category) query.category = category;
+
+    if (search) query.$text = { $search: search };
+
+    if (startDate || endDate) { 
+    // "If the user provided at least one date..."
+
+    query.date = {}; 
+    // "Create an empty 'date' object in our database query."
+
+    if (startDate) query.date.$gte = new Date(startDate); 
+    // "If there's a start date, tell the database: 'Find records WHERE date is >= StartDate'."
+
+    if (endDate) query.date.$lte = new Date(endDate); 
+    // "If there's an end date, tell the database: 'Find records WHERE date is <= EndDate'."
+}
+
+   const [records, total] = await Promise.all([
+        FinancialRecords.find(query)
+            .sort({ date: -1 }) // Recent activity first
+            .skip(skip)
+            .limit(limit)
+            .lean(), // lean() makes it faster by returning plain JS objects
+        FinancialRecords.countDocuments(query)
+    ]);
+
+    return { 
+        records, 
+        total, 
+        currentPage: page,
+        totalPages: Math.ceil(total / limit)
+    };
+};
+
+
+export {createRecordService, updateRecordService, deleteRecordService, getRecordsService}

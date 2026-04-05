@@ -4,7 +4,7 @@ import {verifyJWT} from "../middleware/auth.middleware.js";
 import {authorizeRoles} from "../middleware/role.middleware.js";
 import {validate} from "../middleware/validator.middleware.js";
 import { createRecordValidator, updateRecordValidator } from "../validator/financialRecords.validator.js";
-import { createRecord, updateRecord, deleteRecord } from "../controller/financialRecords.controller.js";
+import { createRecord, updateRecord, deleteRecord, getRecords } from "../controller/financialRecords.controller.js";
 import { IdValidator } from "../validator/user.validator.js";
 
 const financialRecordsRouter = express.Router();
