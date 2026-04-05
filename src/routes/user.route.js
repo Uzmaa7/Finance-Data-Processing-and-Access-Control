@@ -1,19 +1,25 @@
-import express from "express";
-import { loginUser, logoutUser, refreshAccessToken, registerUser } from "../controller/user.controller.js";
-import { loginValidation, registerUserValidation } from "../validator/user.validator.js";
-import { validate } from "../middleware/validator.middleware.js";
+import express from "express-validator";
+import { authorizeRoles } from "../middleware/role.middleware.js";
+import {UserRoles} from "../utils/constants.js"
 import {verifyJWT} from "../middleware/auth.middleware.js"
 
 
 const userRouter = express.Router();
 
-userRouter.post("/", registerUserValidation(), validate, registerUser);
+//==============================//
+//   Only ADMIN can manage user
+//===============================// 
 
-userRouter.post("/login", loginValidation(), validate, loginUser);
+userRouter.use(verifyJWT);
+userRouter.use(authorizeRoles(UserRoles.ADMIN));
 
-//secure routes
-userRouter.post("/logout", verifyJWT, logoutUser);
 
-userRouter.post("/refresh-token", refreshAccessToken);
+userRouter.post("/", createUser);
+
+userRouter.get("/", getUsers);
+
+userRouter.patch("/:id", updateUser);
+
+userRouter.delete("/:id", deleteUser);
 
 export default userRouter;

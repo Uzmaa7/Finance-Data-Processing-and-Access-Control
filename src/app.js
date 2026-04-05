@@ -2,7 +2,7 @@ import express from "express";
 import cors from "cors";
 
 
-import userRouter from "./routes/user.route.js";
+import authRouter from "./routes/auth.route.js";
 
 const app = express();
 
@@ -20,6 +20,6 @@ app.get("/", (req, res) => {
     res.send("finance tracker is Ready...!!! So are you???")
 })
 
-app.use("/api/v1/users", userRouter);
+app.use("/api/v1/auth", authRouter);
 
 export default app;
