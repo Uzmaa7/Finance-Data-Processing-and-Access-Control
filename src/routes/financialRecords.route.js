@@ -3,7 +3,7 @@ import { UserRoles } from "../utils/constants.js";
 import {verifyJWT} from "../middleware/auth.middleware.js";
 import {authorizeRoles} from "../middleware/role.middleware.js";
 import {validate} from "../middleware/validator.middleware.js";
-import { createRecordValidator } from "../validator/financialRecords.validator.js";
+import { createRecordValidator, updateRecordValidator } from "../validator/financialRecords.validator.js";
 import { createRecord } from "../controller/financialRecords.controller.js";
 
 const financialRecordsRouter = express.Router();
@@ -44,7 +44,9 @@ financialRecordsRouter.post(
 
 financialRecordsRouter.patch(
     "/:id", 
-    authorizeRoles(UserRoles.ADMIN), 
+    authorizeRoles(UserRoles.ADMIN),
+    updateRecordValidator(),
+    validate,
     updateRecord
 );
 

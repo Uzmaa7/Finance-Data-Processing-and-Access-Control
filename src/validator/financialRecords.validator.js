@@ -22,4 +22,26 @@ const createRecordValidator = () => {
             .isLength({ max: 200 }).withMessage("description can not excedd the length of 200 characters")
 ]};
 
-export {createRecordValidator};
+const updateRecordValidator = () => {
+    return[
+        param("id")
+            .isMongoId().withMessage("Invalid record ID"),
+        body("amount")
+            .optional()
+            .isNumeric().withMessage("Amount must be a number").custom(val => val > 0),
+        body("type")
+            .optional()
+            .isIn(AvailableAmount).withMessage("Invalid type"),
+        body("category")
+            .optional()
+            .notEmpty()
+            .trim(),
+        body("date")
+            .optional().isISO8601().toDate(),
+        body("notes")
+            .optional()
+            .isString()
+            .trim()
+]};
+
+export {createRecordValidator, updateRecordValidator};
