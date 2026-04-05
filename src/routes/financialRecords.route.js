@@ -2,6 +2,9 @@ import express from "express";
 import { UserRoles } from "../utils/constants.js";
 import {verifyJWT} from "../middleware/auth.middleware.js";
 import {authorizeRoles} from "../middleware/role.middleware.js";
+import {validate} from "../middleware/validator.middleware.js";
+import { createRecordValidator } from "../validator/financialRecords.validator.js";
+import { createRecord } from "../controller/financialRecords.controller.js";
 
 const financialRecordsRouter = express.Router();
 
@@ -34,6 +37,8 @@ financialRecordsRouter.get(
 financialRecordsRouter.post(
     "/", 
     authorizeRoles(UserRoles.ADMIN), 
+    createRecordValidator(),
+    validate,
     createRecord
 );
 
