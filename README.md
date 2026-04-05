@@ -1,7 +1,6 @@
-# Backend README
 
-## Project
-`FINANCE-DATA-PROCESSING-AND-ACCESS-CONTROL`
+
+## FINANCE-DATA-PROCESSING-AND-ACCESS-CONTROL
 
 A production-grade Node.js/Express backend for a Finance Dashboard. This system manages financial records, implements granular Role-Based Access Control (RBAC), and provides complex analytics via MongoDB Aggregation Pipelines.
 
@@ -95,9 +94,9 @@ PORT=3000
 MONGODB_URI=mongodb+srv://username:password@cluster.mongodb.net/revicode?retryWrites=true&w=majority
 
 # JWT Configuration
-ACCESS_TOKEN_SECRET=your_very_secret_access_token_string_at_least_32_chars_long
+ACCESS_TOKEN_SECRET=your_very_secret_access_token_string
 ACCESS_TOKEN_EXPIRY=7d
-REFRESH_TOKEN_SECRET=your_very_secret_refresh_token_string_at_least_32_chars_long
+REFRESH_TOKEN_SECRET=your_very_secret_refresh_token_string
 REFRESH_TOKEN_EXPIRY=10d
 
 BASE_URL=http://127.0.0.1:3000
@@ -105,7 +104,7 @@ BASE_URL=http://127.0.0.1:3000
 ```
 
 ## API Documentation
-See `Backend/API_DOCUMENTATION.md` for complete endpoint details.
+**[View Full API Documentation](https://github.com/Uzmaa7/Finance-Data-Processing-and-Access-Control/blob/main/API_DOCUMENTATION.md)**
 
 ---
 ## Assignment Alignment
