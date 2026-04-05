@@ -46,4 +46,15 @@ const updateUserService = async(userId, updateData) => {
     return user;
 }
 
-export {getUsersService, updateUserService};
+//Soft Delete User
+const deleteUserService = async (userId) => {
+    const user = await User.findByIdAndUpdate(
+        userId,
+        { isDeleted: true, status: 'INACTIVE' },
+        { new: true }
+    );
+    if (!user) throw new ApiError(404, "User not found");
+    return true;
+}
+
+export {getUsersService, updateUserService, deleteUserService};

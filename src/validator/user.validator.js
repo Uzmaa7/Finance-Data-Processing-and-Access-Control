@@ -1,4 +1,5 @@
 import {body, param} from "express-validator";
+import { AvailableUserRoles, AvailableUserStatus } from "../utils/constants.js";
 
 const updateUserValidator = () => {
     return [
@@ -16,4 +17,11 @@ const updateUserValidator = () => {
     ];
 };
 
-export {updateUserValidator};
+const userIdValidator = () => {
+    return [
+        param("id")
+            .isMongoId().withMessage("Invalid User ID format. Please provide a valid MongoDB ID.")
+    ];
+};
+
+export {updateUserValidator, userIdValidator};

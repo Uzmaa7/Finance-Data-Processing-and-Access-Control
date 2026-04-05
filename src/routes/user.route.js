@@ -24,6 +24,6 @@ userRouter.get("/", getUsers);
 
 userRouter.patch("/:id", updateUserValidator(), validate, updateUser);
 
-userRouter.delete("/:id", deleteUser);
+userRouter.delete("/:id", userIdValidator(), validate, deleteUser);
 
 export default userRouter;

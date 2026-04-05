@@ -1,7 +1,7 @@
 import {asyncHandler} from "../utils/asyncHandler.js"
 import { createUserService } from "../service/auth.service.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
-import {getUsersService, updateUserService} from "../service/user.service.js";
+import {getUsersService, updateUserService, deleteUserService} from "../service/user.service.js";
 
 
 const createUser = asyncHandler(async(req, res) => {
@@ -48,8 +48,17 @@ const updateUser = asyncHandler(async(req, res) => {
     );
 })
 
-const deleteUser = asyncHandler(async(req, res) => {
 
+const deleteUser = asyncHandler(async(req, res) => {
+    const {id} = req.params;
+    await deleteUserService(id);
+    res.status(200).json(
+        new ApiResponse(
+            200,
+            {},
+            "User deleted (Soft Delete)" 
+        )
+    );
 })
 
 
