@@ -4,7 +4,7 @@ import {UserRoles} from "../utils/constants.js"
 import {verifyJWT} from "../middleware/auth.middleware.js"
 import { validate } from "../middleware/validator.middleware.js";
 import { registerUserValidation } from "../validator/auth.validator.js";
-import { createUser } from "../controller/user.controller.js";
+import { createUser, getUsers } from "../controller/user.controller.js";
 
 const userRouter = express.Router();
 
