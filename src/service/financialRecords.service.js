@@ -1,5 +1,6 @@
 import FinancialRecords from "../model/financialRecords.model.js";
 import {ApiError} from "../utils/ApiError.js";
+import {asyncHandler} from "../utils/asyncHandler.js";
 
 const createRecordService = async (userId, data) => {
 

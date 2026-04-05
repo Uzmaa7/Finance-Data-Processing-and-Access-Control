@@ -6,6 +6,7 @@ import cookieParser from "cookie-parser";
 import authRouter from "./routes/auth.route.js";
 import userRouter from "./routes/user.route.js";
 import financialRecordsRouter from "./routes/financialRecords.route.js";
+import dashboardRouter from "./routes/dashboard.route.js";
 
 const app = express();
 
@@ -27,5 +28,6 @@ app.get("/", (req, res) => {
 app.use("/api/v1/auth", authRouter);
 app.use("/api/v1/users", userRouter);
 app.use("/api/v1/financialRecords", financialRecordsRouter);
+app.use("/api/v1/dashboards", dashboardRouter);
 
 export default app;

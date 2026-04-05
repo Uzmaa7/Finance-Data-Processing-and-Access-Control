@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import { AvailableAmount } from "../utils/constants";
+import { AvailableAmount } from "../utils/constants.js";
 
 const financialRecordsSchema = new mongoose.Schema({
 

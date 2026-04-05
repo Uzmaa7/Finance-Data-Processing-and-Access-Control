@@ -20,18 +20,9 @@ financialRecordsRouter.get(
     getRecords
 );
 
-//========================================================//
-//        2. ACCESS INSIGHTS (Dashboard Summaries)
-//         Allowed: Analyst, Admin (Viewer strictly restricted)
-//=======================================================//
-financialRecordsRouter.get(
-    "/summary", 
-    authorizeRoles(UserRoles.ANALYST, UserRoles.ADMIN), 
-    getSummary
-);
 
 //========================================================//
-//       3. CREATE & MODIFY (Full Management Access)
+//       2. CREATE & MODIFY (Full Management Access)
 //        Allowed: Admin Only (Viewer & Analyst strictly restricted)
 //=======================================================//
 
