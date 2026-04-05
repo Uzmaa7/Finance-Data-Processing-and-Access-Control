@@ -6,7 +6,7 @@ import { validate } from "../middleware/validator.middleware.js";
 import { registerUserValidation } from "../validator/auth.validator.js";
 import { createUser, getUsers, updateUser, deleteUser } from "../controller/user.controller.js";
 import { updateUserService } from "../service/user.service.js";
-import { updateUserValidator } from "../validator/user.validator.js";
+import { updateUserValidator, userIdValidator } from "../validator/user.validator.js";
 
 const userRouter = express.Router();
 

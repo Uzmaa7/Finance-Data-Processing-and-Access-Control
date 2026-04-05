@@ -1,6 +1,6 @@
 import User from "../model/user.model.js";
 import {ApiError} from "../utils/ApiError.js";
-import { UserRoles } from "../utils/constants.js";
+import { UserRoles, UserStatus } from "../utils/constants.js";
 
 
 const generateAccessAndRefreshToken = async (userId) => {
@@ -77,7 +77,7 @@ const loginUserService = async(data) => {
         throw new ApiError(400, "email is required")
     }
 
-    const user = await User.findOne({email});
+    const user = await User.findOne({email}).select("+password");
     if(!user){
         throw new ApiError(404, "User does not exist")
     }
